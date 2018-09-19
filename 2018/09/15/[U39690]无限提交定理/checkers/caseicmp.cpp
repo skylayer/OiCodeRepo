@@ -36,35 +36,32 @@ using namespace std;
 
 #define forn(i, n) for (int i = 0; i < int(n); i++)
 
-vector<long long> readStream(InStream& in, TResult pe)
-{
+vector<long long> readStream(InStream& in, TResult pe) {
     vector<long long> result;
 
-    for (int testCase = 1; !in.seekEof(); testCase++)
-        {
-            string caseStr = in.readToken();
+    for (int testCase = 1; !in.seekEof(); testCase++) {
+        string caseStr = in.readToken();
 
-            if (caseStr != "Case")
-                quitf(pe, "Expected 'Case' but found '%s' [test case %d]", compress(caseStr).c_str(), testCase);
+        if (caseStr != "Case")
+            quitf(pe, "Expected 'Case' but found '%s' [test case %d]", compress(caseStr).c_str(), testCase);
 
-            string numExpStr;
-            stringstream ss;
-            ss << testCase;
-            ss >> numExpStr;
-            numExpStr += ":";
-            string numStr = in.readToken();
+        string numExpStr;
+        stringstream ss;
+        ss << testCase;
+        ss >> numExpStr;
+        numExpStr += ":";
+        string numStr = in.readToken();
 
-            if (numExpStr != numStr)
-                quitf(pe, "Expected '%s' but found '%s' [test case %d]", compress(numExpStr).c_str(), compress(numStr).c_str(), testCase);
+        if (numExpStr != numStr)
+            quitf(pe, "Expected '%s' but found '%s' [test case %d]", compress(numExpStr).c_str(), compress(numStr).c_str(), testCase);
 
-            result.push_back(in.readLong());
-        }
+        result.push_back(in.readLong());
+    }
 
     return result;
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     setName("Single int64 checker with testcase-support");
     registerTestlibCmd(argc, argv);
 
@@ -81,19 +78,16 @@ int main(int argc, char* argv[])
 
     string message = format("%u case(s):", (unsigned int)(ja.size()));
 
-    if (ja.size() <= 5)
-        {
-            forn(i, ja.size())
-            message += " " + vtos(ja[i]);
-        }
-    else
-        {
-            forn(i, 3)
-            message += " " + vtos(ja[i]);
-            message += " ...";
-            forn(i, 2)
-            message += " " + vtos(ja[ja.size() - 2 + i]);
-        }
+    if (ja.size() <= 5) {
+        forn(i, ja.size())
+        message += " " + vtos(ja[i]);
+    } else {
+        forn(i, 3)
+        message += " " + vtos(ja[i]);
+        message += " ...";
+        forn(i, 2)
+        message += " " + vtos(ja[ja.size() - 2 + i]);
+    }
 
     quitf(_ok, "%s", message.c_str());
 }

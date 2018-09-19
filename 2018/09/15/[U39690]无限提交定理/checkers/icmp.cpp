@@ -1,8 +1,7 @@
 #include "testlib.h"
 #include <stdio.h>
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
     setName("compare two signed int%ld's", 8 * sizeof(int));
     registerTestlibCmd(argc, argv);
 

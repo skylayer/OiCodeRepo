@@ -4,8 +4,7 @@
 
 const double EPS = 1.5E-6;
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
     setName("compare two doubles, maximal absolute error = %.10f", EPS);
     registerTestlibCmd(argc, argv);
 

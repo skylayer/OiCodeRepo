@@ -3,8 +3,7 @@
 
 using namespace std;
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
     setName("compare unordered sequences of signed int%lu numbers", 8 * sizeof(long long));
 
     registerTestlibCmd(argc, argv);
@@ -39,16 +38,15 @@ int main(int argc, char * argv[])
     if (ja.size() <= 5)
         for (int i = 0; i < min(int(ja.size()), 5); i++)
             message += " " + vtos(ja[i]);
-    else
-        {
-            for (int i = 0; i < 2; i++)
-                message += " " + vtos(ja[i]);
+    else {
+        for (int i = 0; i < 2; i++)
+            message += " " + vtos(ja[i]);
 
-            message += " ...";
+        message += " ...";
 
-            for (int i = 0; i < 2; i++)
-                message += " " + vtos(ja[ja.size() - 2 + i]);
-        }
+        for (int i = 0; i < 2; i++)
+            message += " " + vtos(ja[ja.size() - 2 + i]);
+    }
 
     quitf(_ok, "%s", message.c_str());
 }

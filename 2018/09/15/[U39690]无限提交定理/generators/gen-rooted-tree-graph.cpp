@@ -26,8 +26,7 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     registerGen(argc, argv, 1);
 
     int n = atoi(argv[1]);
@@ -50,13 +49,12 @@ int main(int argc, char* argv[])
     for (int i = 1; i < n; i++)
         pp[perm[i]] = perm[p[i]];
 
-    for (int i = 1; i < n; i++)
-        {
-            printf("%d", pp[i] + 1);
+    for (int i = 1; i < n; i++) {
+        printf("%d", pp[i] + 1);
 
-            if (i + 1 < n)
-                printf(" ");
-        }
+        if (i + 1 < n)
+            printf(" ");
+    }
 
     printf("\n");
 
