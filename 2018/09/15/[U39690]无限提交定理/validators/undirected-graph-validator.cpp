@@ -26,7 +26,8 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     registerValidation(argc, argv);
 
     int n = inf.readInt(1, 1000, "n");
@@ -36,7 +37,8 @@ int main(int argc, char* argv[]) {
 
     set<pair<int,int> > edges;
 
-    forn(i, m) {
+    forn(i, m)
+    {
         int a = inf.readInt(1, n, "a_i");
         inf.readSpace();
         int b = inf.readInt(1, n, "b_i");

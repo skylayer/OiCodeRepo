@@ -26,7 +26,8 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     registerGen(argc, argv, 1);
 
     int n = atoi(argv[1]);
@@ -37,11 +38,12 @@ int main(int argc, char* argv[]) {
 
     set<pair<int,int> > edges;
 
-    while (edges.size() < k) {
-        int a = rnd.wnext(n, t);
-        int b = rnd.wnext(m, t);
-        edges.insert(make_pair(a, b));
-    }
+    while (edges.size() < k)
+        {
+            int a = rnd.wnext(n, t);
+            int b = rnd.wnext(m, t);
+            edges.insert(make_pair(a, b));
+        }
 
     vector<pair<int,int> > e(edges.begin(), edges.end());
     shuffle(e.begin(), e.end());

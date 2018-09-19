@@ -38,13 +38,15 @@ using namespace std;
 
 string token;
 
-vector<string> readStreamCase(InStream& in, TResult pe, int testCase, bool& prereadCase) {
-    if (!prereadCase) {
-        string caseStr = in.readToken();
+vector<string> readStreamCase(InStream& in, TResult pe, int testCase, bool& prereadCase)
+{
+    if (!prereadCase)
+        {
+            string caseStr = in.readToken();
 
-        if (caseStr != "Case")
-            quitf(pe, "Expected 'Case' but found '%s' [test case %d]", compress(caseStr).c_str(), testCase);
-    }
+            if (caseStr != "Case")
+                quitf(pe, "Expected 'Case' but found '%s' [test case %d]", compress(caseStr).c_str(), testCase);
+        }
 
     string numExpStr;
     stringstream ss;
@@ -58,21 +60,24 @@ vector<string> readStreamCase(InStream& in, TResult pe, int testCase, bool& prer
 
     vector<string> result;
 
-    while (!in.seekEof()) {
-        in.readTokenTo(token);
+    while (!in.seekEof())
+        {
+            in.readTokenTo(token);
 
-        if (token == "Case") {
-            prereadCase = true;
-            break;
+            if (token == "Case")
+                {
+                    prereadCase = true;
+                    break;
+                }
+
+            result.push_back(token);
         }
-
-        result.push_back(token);
-    }
 
     return result;
 }
 
-string stringsToString(const vector<string>& a) {
+string stringsToString(const vector<string>& a)
+{
     if (a.empty())
         return "\"\" [size=0]";
 
@@ -83,7 +88,8 @@ string stringsToString(const vector<string>& a) {
     return format("\"%s\" [size=%u]", compress(trim(elems)).c_str(), (unsigned int)(a.size()));
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     setName("Tokens checker with testcase-support");
     registerTestlibCmd(argc, argv);
 
@@ -92,18 +98,20 @@ int main(int argc, char* argv[]) {
     bool ansPrereadCase = false;
     bool oufPrereadCase = false;
 
-    while (!ans.seekEof()) {
-        testCase++;
+    while (!ans.seekEof())
+        {
+            testCase++;
 
-        vector<string> ja = readStreamCase(ans, _fail, testCase, ansPrereadCase);
-        vector<string> pa = readStreamCase(ouf, _pe, testCase, oufPrereadCase);
+            vector<string> ja = readStreamCase(ans, _fail, testCase, ansPrereadCase);
+            vector<string> pa = readStreamCase(ouf, _pe, testCase, oufPrereadCase);
 
-        if (ja != pa) {
-            string js = stringsToString(ja);
-            string ps = stringsToString(pa);
-            quitf(_wa, "Sequences differ: jury has %s, but participant has %s [test case %d]", js.c_str(), ps.c_str(), testCase);
+            if (ja != pa)
+                {
+                    string js = stringsToString(ja);
+                    string ps = stringsToString(pa);
+                    quitf(_wa, "Sequences differ: jury has %s, but participant has %s [test case %d]", js.c_str(), ps.c_str(), testCase);
+                }
         }
-    }
 
     quitf(_ok, "%d test cases(s)", testCase);
 }

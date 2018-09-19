@@ -3,7 +3,8 @@
 
 using namespace std;
 
-int main(int argc, char * argv[]) {
+int main(int argc, char * argv[])
+{
     setName("compare ordered sequences of signed int%ld numbers", 8 * sizeof(long long));
 
     registerTestlibCmd(argc, argv);
@@ -11,34 +12,38 @@ int main(int argc, char * argv[]) {
     int n = 0;
     string firstElems;
 
-    while (!ans.seekEof() && !ouf.seekEof()) {
-        n++;
-        long long j = ans.readLong();
-        long long p = ouf.readLong();
+    while (!ans.seekEof() && !ouf.seekEof())
+        {
+            n++;
+            long long j = ans.readLong();
+            long long p = ouf.readLong();
 
-        if (j != p)
-            quitf(_wa, "%d%s numbers differ - expected: '%s', found: '%s'", n, englishEnding(n).c_str(), vtos(j).c_str(), vtos(p).c_str());
-        else if (n <= 5) {
-            if (firstElems.length() > 0)
-                firstElems += " ";
+            if (j != p)
+                quitf(_wa, "%d%s numbers differ - expected: '%s', found: '%s'", n, englishEnding(n).c_str(), vtos(j).c_str(), vtos(p).c_str());
+            else if (n <= 5)
+                {
+                    if (firstElems.length() > 0)
+                        firstElems += " ";
 
-            firstElems += vtos(j);
+                    firstElems += vtos(j);
+                }
         }
-    }
 
     int extraInAnsCount = 0;
 
-    while (!ans.seekEof()) {
-        ans.readLong();
-        extraInAnsCount++;
-    }
+    while (!ans.seekEof())
+        {
+            ans.readLong();
+            extraInAnsCount++;
+        }
 
     int extraInOufCount = 0;
 
-    while (!ouf.seekEof()) {
-        ouf.readLong();
-        extraInOufCount++;
-    }
+    while (!ouf.seekEof())
+        {
+            ouf.readLong();
+            extraInOufCount++;
+        }
 
     if (extraInAnsCount > 0)
         quitf(_wa, "Answer contains longer sequence [length = %d], but output contains %d elements", n + extraInAnsCount, n);

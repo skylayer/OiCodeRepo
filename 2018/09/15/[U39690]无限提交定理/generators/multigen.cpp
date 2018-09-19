@@ -15,14 +15,16 @@
 
 using namespace std;
 
-void writeTest(int test) {
+void writeTest(int test)
+{
     startTest(test);
 
     cout << rnd.next(1, test * test)
          << " " << rnd.next(1, test * test) << endl;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     registerGen(argc, argv, 1);
 
     for (int i = 1; i <= 10; i++)
