@@ -4,13 +4,15 @@ using namespace std;
 map<string,string>num2reg;
 
 string id;
-void work() {
+void work()
+{
     cin>>id;
     string region=num2reg[id.substr(0,2)];
     string y=id.substr(6,4),m=id.substr(10,2),d=id.substr(12,2);
     cout<<"He/She is from "<<region<<",and his/her birthday is on "<<m<<','<<d<<','<<y<<" based on the table.\n";
 }
-int main() {
+int main()
+{
     num2reg["33"]="Zhejiang";
     num2reg["11"]="Beijing";
     num2reg["71"]="Taiwan";

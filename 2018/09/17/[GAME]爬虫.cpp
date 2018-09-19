@@ -6,18 +6,21 @@
 #endif
 typedef int(__stdcall *UDF)(LPVOID,LPCSTR,LPCSTR,DWORD,LPVOID);
 UDF URLDownloadToFile = (UDF)GetProcAddress(LoadLibrary("urlmon.dll"),"URLDownloadToFileA");
-char* strfind(char *text,char *temp) {
+char* strfind(char *text,char *temp)
+{
     int i = -1,j,l = strlen(temp);
 
-    while(text[++i]) {
-        for(j=0; j<l; j++)if(text[i+j] == 0 || text[i+j] != temp[j])break;
+    while(text[++i])
+        {
+            for(j=0; j<l; j++)if(text[i+j] == 0 || text[i+j] != temp[j])break;
 
-        if(j == l)return text+i+l;
-    }
+            if(j == l)return text+i+l;
+        }
 
     return 0;
 }
-void UTF8ToANSI(char *str) {
+void UTF8ToANSI(char *str)
+{
     int len = MultiByteToWideChar(CP_UTF8,0,str,-1,0,0);
     WCHAR *wsz = new WCHAR[len+1];
     len = MultiByteToWideChar(CP_UTF8,0,str,-1,wsz,len);
@@ -30,7 +33,8 @@ void UTF8ToANSI(char *str) {
 HANDLE hOutput;
 char name[32];
 int count[8];
-void problem(char *str) {
+void problem(char *str)
+{
     int i = 0,len;
     DWORD unused;
     char prob[32],url[128],*file,*ptr;
@@ -50,10 +54,11 @@ void problem(char *str) {
     CloseHandle(hFile);
     file = strfind(file,"\xE9\x9A\xBE\xE5\xBA\xA6");
 
-    if(file == 0) {
-        delete []ptr;
-        return;
-    }
+    if(file == 0)
+        {
+            delete []ptr;
+            return;
+        }
 
     file = strfind(file,"lg-bg-");
 
@@ -80,7 +85,8 @@ void problem(char *str) {
         "尚无评定:       %d\n",name,prob,count[0],count[1],count[2],count[3],
         count[4],count[5],count[6],count[7]);
 }
-int main() {
+int main()
+{
     int uid,len,i = 0;
     DWORD unused;
     char url[128],user[16],*file,*ptr;
@@ -100,18 +106,22 @@ int main() {
     sprintf(user,"U%d ",uid);
     ptr = strfind(file,user);
 
-    if(ptr) {
-        while(ptr[0] != '<' || ptr[1] != '/' || ptr[2] != 'h')name[i++] = *ptr++;
+    if(ptr)
+        {
+            while(ptr[0] != '<' || ptr[1] != '/' || ptr[2] != 'h')name[i++] = *ptr++;
 
-        printf("\n%s 的统计: ",name);
-        ptr = strfind(file,"通过题目</h2>\n[<");
+            printf("\n%s 的统计: ",name);
+            ptr = strfind(file,"通过题目</h2>\n[<");
 
-        if(ptr)while(*ptr != '<') {
-                ptr = strfind(ptr,"\">");
-                problem(ptr);
-                ptr = strfind(ptr,"]\n");
-            } else printf("还没有通过任何题目\n");
-    } else printf("用户不存在\n");
+            if(ptr)while(*ptr != '<')
+                    {
+                        ptr = strfind(ptr,"\">");
+                        problem(ptr);
+                        ptr = strfind(ptr,"]\n");
+                    }
+            else printf("还没有通过任何题目\n");
+        }
+    else printf("用户不存在\n");
 
     DeleteFile("download.tmp");
     delete []file;
