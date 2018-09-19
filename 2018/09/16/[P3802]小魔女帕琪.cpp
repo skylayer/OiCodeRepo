@@ -3,8 +3,7 @@ using namespace std;
 int a[8];
 long double ans=1,sum;
 
-int main()
-{
+int main() {
 
     for(int i=1; i<=7; i++)
         ans*=i,scanf("%d",&a[i]),sum+=a[i];

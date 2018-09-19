@@ -41,8 +41,7 @@ char src[51][51],msk[51][51];
 
 set<string>lst;
 
-void T()
-{
+void T() {
     char tmp[51][51];
     memcpy(tmp,msk,sizeof tmp);
     memset(msk,'.',sizeof msk);
@@ -53,8 +52,7 @@ void T()
                 msk[j][n-i+1]='*';
 }
 
-string get()
-{
+string get() {
     string ans;
 
     for(register int i=1; i<=n; i++)
@@ -67,71 +65,61 @@ string get()
 }
 
 
-void work()
-{
+void work() {
     lst.clear();
     scanf("%d",&n);
 
-    for(int i=1; i<=n; i++)
-        {
-            for(int j=1; j<=n; j++)
-                {
-                    char c=getchar();
+    for(int i=1; i<=n; i++) {
+        for(int j=1; j<=n; j++) {
+            char c=getchar();
 
-                    while(isspace(c)) c=getchar();
+            while(isspace(c)) c=getchar();
 
-                    src[i][j]=c;
-                }
+            src[i][j]=c;
         }
+    }
 
-    for(int i=1; i<=n; i++)
-        {
-            for(int j=1; j<=n; j++)
-                {
-                    char c=getchar();
+    for(int i=1; i<=n; i++) {
+        for(int j=1; j<=n; j++) {
+            char c=getchar();
 
-                    while(isspace(c)) c=getchar();
+            while(isspace(c)) c=getchar();
 
-                    msk[i][j]=c;
-                }
+            msk[i][j]=c;
         }
+    }
 
     string pcd[5];
 
-    for(int i=1; i<=4; i++)
-        {
-            pcd[i]=get();
-            T();
-        }
+    for(int i=1; i<=4; i++) {
+        pcd[i]=get();
+        T();
+    }
 
     scanf("%d",&m);
 
-    for(int i=1; i<=m; i++)
-        {
-            string ans;
-            cin>>ans;
-            lst.insert(ans);
-        }
+    for(int i=1; i<=m; i++) {
+        string ans;
+        cin>>ans;
+        lst.insert(ans);
+    }
 
     queue<string>bff;
     map<string,string>fa;
 
-    while(!bff.empty())
-        {
-            string u=bff.front();
-            bff.pop();
+    while(!bff.empty()) {
+        string u=bff.front();
+        bff.pop();
 
-            for(set<string>::iterator p=lst.begin(); p!=lst.end(); p++)
-                {
-                    if(u.substr(0,p->length())==*p)
-                        {
-                            string llll;
-                            bff.push(llll=u.substr(p->length()));
+        for(set<string>::iterator p=lst.begin(); p!=lst.end(); p++) {
+            if(u.substr(0,p->length())==*p) {
+                string llll;
+                bff.push(llll=u.substr(p->length()));
 
-                            if(!llll.length())
-                            }
+                if(!llll.length())
                 }
         }
+    }
 
 
 
@@ -139,16 +127,14 @@ void work()
 
 }
 
-int main()
-{
+int main() {
     int T;
     scanf("%d",&T);
 
-    for(int i=1; i<=T; i++)
-        {
-            printf("Case #%d: ",i);
-            work();
-        }
+    for(int i=1; i<=T; i++) {
+        printf("Case #%d: ",i);
+        work();
+    }
 
 
 
